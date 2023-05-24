@@ -84,4 +84,13 @@ const addBookHandler = (request, h) => {
     });
 };
 
-module.exports = { addBookHandler };
+const getAllBooksHandler = () => ({
+    status: 'success',
+    data: {
+        books.map((item, index) => {
+            
+        }),
+    },
+});
+
+module.exports = { addBookHandler, getAllBooksHandler };
