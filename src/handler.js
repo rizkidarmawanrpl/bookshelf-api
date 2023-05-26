@@ -60,7 +60,18 @@ const addBookHandler = (request, h) => {
     const updatedAt  = insertedAt;
 
     const newBook = {
-        id, name, year, author, summary, publisher, pageCount, readPage, finished, reading, insertedAt, updatedAt
+        id,
+        name,
+        year,
+        author,
+        summary,
+        publisher,
+        pageCount,
+        readPage,
+        finished,
+        reading,
+        insertedAt,
+        updatedAt,
     };
 
     books.push(newBook);
@@ -86,6 +97,7 @@ const addBookHandler = (request, h) => {
 
 const getAllBooksHandler = (request, h) => {
     const { name, reading, finished } = request.query;
+    const dataEnum = ['0', '1'];
 
     let filterBook = books;
 
@@ -93,12 +105,12 @@ const getAllBooksHandler = (request, h) => {
         filterBook = books.filter((book) => book.name.toLowerCase().includes(name.toLowerCase()));
     }
 
-    if (reading !== undefined) {
+    if (reading !== undefined && dataEnum.includes(reading)) {
         let read = (reading === '1')? true : false;
         filterBook = books.filter((book) => book.reading === read);
     }
 
-    if (finished !== undefined) {
+    if (finished !== undefined && dataEnum.includes(finished)) {
         let finish = (finished === '1')? true : false;
         filterBook = books.filter((book) => book.finished === finish);
     }
@@ -218,4 +230,10 @@ const deleteBookByIdHandler = (request, h) => {
     });
 }
 
-module.exports = { addBookHandler, getAllBooksHandler, getBookByIdHandler, editBookByIdHandler, deleteBookByIdHandler };
+module.exports = {
+    addBookHandler,
+    getAllBooksHandler,
+    getBookByIdHandler,
+    editBookByIdHandler,
+    deleteBookByIdHandler,
+};
